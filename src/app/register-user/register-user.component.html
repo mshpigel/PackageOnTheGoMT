@@ -1,0 +1,183 @@
+<div class="container" style="background-color:#FBBD08">
+
+  <div class="ui steps">
+    <a class="step" [ngClass]="{'active':active==1}">
+      <i class="user plus icon"></i>
+      <div class="content">
+        <div class="title">Personal Details</div>
+        <div class="description">Enter personal details</div>
+      </div>
+    </a>
+
+    <a class="step" [ngClass]="{'active':active==2}" (click)="active=2">
+      <i class="credit card outline icon"></i>
+      <div class="content">
+        <div class="title">Billing</div>
+        <div class="description">Enter billing information</div>
+      </div>
+    </a>
+    <a class="step" [ngClass]="{'active':active==3}" (click)="active=3">
+      <i class="yellow road icon"></i>
+      <div class="content">
+        <div class="title">Route</div>
+        <div class="description">Enter your route </div>
+      </div>
+    </a>
+  </div>
+
+  <script>
+    autocomplete(document.getElementById("myInput"), { countries });
+  </script>
+
+
+  <form autocomplete="off" #myform="ngForm" enctype="application/x-www-form-urlencoded">
+    <div id="personalDetailsDiv"  *ngIf="active==1">
+      <div class="form-group col-lg-3">
+        <div class="ui icon input">
+        <label for="uFName"> </label>
+        <input id="uFName" class="form-control" required placeholder="firstName" #uFName="ngModel"
+          [(ngModel)]="newlyRegistered.uFName" name="uFName">
+          <i class="road icon"></i></div>
+        <div *ngIf="uFName.errors &&uFName.errors.required && 
+        (uFName.dirty || uFName.touched)">
+          <span class="req"> first name is required </span>
+        </div>
+
+        <br>
+        <label for="uLName"> </label>
+        <input id="uLName" class="form-control" required placeholder="lastName" #uLName="ngModel"
+          [(ngModel)]="newlyRegistered.uLName" name="uLName">
+        <div *ngIf="uLName.errors &&uLName.errors.required && 
+          (uLName.dirty || uLName.touched)">
+          <span class="req"> last name is required </span>
+        </div>
+        <br>
+        <label for="uMobile"> </label>
+        <input id="uMobile" class="form-control" required placeholder="mobile" #uMobile="ngModel"
+          [(ngModel)]="newlyRegistered.uMobile" name="uMobile">
+        <div *ngIf="uMobile.errors &&uMobile.errors.required && 
+      (uMobile.dirty || uMobile.touched)">
+          <span class="req"> mobile is required </span>
+        </div>
+        <div *ngIf="this.valid==false">
+          <span class="req">mobile already exists</span>
+        </div>
+        <br>
+
+        <label for="uEmail"> </label>
+        <input type="email" class="form-control" placeholder="Email no" required id="uEmail"
+          [(ngModel)]="newlyRegistered.uEmail" #uEmail="ngModel" name="uEmail"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+        <div *ngIf=" uEmail.errors &&uEmail.errors.required &&  (uEmail.dirty || uEmail.touched)">
+          <span class="req"> Email is required </span>
+
+        </div>
+        <div class="req" *ngIf="uEmail.errors && uEmail.errors.pattern">
+          Email is invalid
+        </div>
+        <br>
+        <label for="uPassword"> </label>
+        <input id="uPassword" class="form-control" required placeholder="password" #uPassword="ngModel"
+          [(ngModel)]="newlyRegistered.uPassword" name="uPassword">
+        <div *ngIf="uPassword.errors &&uPassword.errors.required &&  (uPassword.dirty || uPassword.touched)">
+          <span class="req"> password is required </span>
+
+        </div>
+      </div>
+  </div>
+      <div id="routeDiv" *ngIf="active==2">
+          <div class="form-group col-lg-3">
+
+        <label for="cNumber"> </label>
+
+        <input id="cNumber" type="number" class="form-control" required placeholder="card number" #cNumber="ngModel"
+          [(ngModel)]="cardDetails.cNumber" name="cNumber">
+        <div *ngIf="cNumber.errors &&cNumber.errors.required && 
+          (cNumber.dirty || cNumber.touched)">
+          <span class="req"> card number is required </span>
+        </div>
+        <br>
+
+        <label for="cBackCode"> </label>
+        <input id="cBackCode" type="number" class="form-control" required placeholder="back code" #cBackCode="ngModel"
+          [(ngModel)]="cardDetails.cBackCode" name="cBackCode">
+        <div *ngIf="cBackCode.errors &&cBackCode.errors.required && 
+          (cBackCode.dirty || cBackCode.touched)">
+          <span class="req"> back code is required </span>
+        </div>
+        <br>
+
+        <label for="cExpCard"> </label>
+        <input id="cExpCard"  type="number" class="form-control" required placeholder="expiry" #cExpCard="ngModel"
+          [(ngModel)]="cardDetails.cExpCard" name="cExpCard">
+        <div *ngIf="cExpCard.errors &&cExpCard.errors.required && 
+          (cExpCard.dirty || cExpCard.touched)">
+          <span class="req"> expiry date is required </span>
+        </div>
+        <br>
+
+        <label for="cOwnerId"> </label>
+        <input id="cOwnerId" type="number" class="form-control" required placeholder="ownerId" #cOwnerId="ngModel"
+          [(ngModel)]="cardDetails.cOwnerId" name="cOwnerId">
+        <div *ngIf="cOwnerId.errors &&cOwnerId.errors.required && 
+          (cOwnerId.dirty || cOwnerId.touched)">
+          <span class="req"> owner id is required </span>
+        </div>
+        <br>
+
+        <label for="cOwnerName"> </label>
+        <input id="cOwnerName" class="form-control" required placeholder="ownerName" #cOwnerName="ngModel"
+          [(ngModel)]="cardDetails.cOwnerName" name="cOwnerName">
+        <div *ngIf="cOwnerName.errors &&cOwnerName.errors.required && 
+          (cOwnerName.dirty || cOwnerName.touched)">
+          <span class="req"> owner name is required </span>
+        </div>
+        <br>
+          </div>
+      </div>
+      <div id="billingDiv" *ngIf="active==3">
+        <form class="example-form">
+         
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID NUMBER" maxlength="1" type="number">
+          </mat-form-field>
+         <br>
+           
+            <!-- <input  placeholder="PASSPORT" type="file"  
+             name="passportImg" #pasportImg="ngModel" [(ngModel)]="file" (change)="saveRoute($event)"> -->
+            <!-- public enum sizes { small=2 , medium = 5,large=15, huge=25};
+            public enum values { small = 300, medium = 1000, large = 4000 }; -->
+            <label>
+               
+              <input type="radio" name="size"  [(ngModel)]="newlyRegistered.uSize" value="2" checked>
+              <img src="../../assets/logo.jpg">
+            </label>
+            <label>
+              <input type="radio" name="size"  [(ngModel)]="newlyRegistered.uSize" value="5" >
+              <img src="../../assets/logo.jpg">
+            </label>
+<br>
+<label>
+            <input type="radio" name="val"  [(ngModel)]="newlyRegistered.uValue" value="2" checked>
+            <img src="../../assets/logo.jpg">
+          </label>
+          <label>
+            <input type="radio" name="val"  [(ngModel)]="newlyRegistered.uValue" value="5" >
+            <img src="../../assets/logo.jpg">
+          </label>
+          <button (click)="addPath()">Add path</button>
+          <app-user-path *ngFor="let path of newlyRegistered.uPaths" [path]="path"></app-user-path>
+         
+        </form>
+      </div>
+
+      <input type="submit" [disabled]="myform.invalid" *ngIf="active==3" value="submit" name="submit" class="btn btn-primary" (click)="SaveNewUser()">
+
+      <input type="submit" [disabled]="myform.invalid" *ngIf="active==1" value="next" name="next" class="btn btn-primary" (click)="SaveNewUser()">
+      <input type="submit" [disabled]="myform.invalid" *ngIf="active==2" value="next" name="next" class="btn btn-primary" (click)="SaveBilling()">
+
+
+    
+  </form>
+
+</div>

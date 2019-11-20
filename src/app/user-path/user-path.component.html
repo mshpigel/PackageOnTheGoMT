@@ -1,0 +1,34 @@
+<br>
+<label for="upHasCar"> </label>
+        <input id="upHasCar" type="checkbox"   #upHasCar="ngModel"
+          [(ngModel)]="path.upHasCar"  [(ngModel)]="pathReturn.upHasCar" name="upHasCar" >By Car
+        <div *ngIf="upHasCar.errors &&upHasCar.errors.required && 
+          (upHasCar.dirty || upHasCar.touched)">
+          <span class="req"> upHasCar id is required </span>
+        </div>
+        <br>
+        <label>From</label>
+        <div fxFlex fxFlexAlign="center"
+        class="autocomplete-container"
+        [ngStyle]="{'min-width.%': 100}"
+>        <mat-google-maps-autocomplete [appearance]="appearance.OUTLINE"
+                                     (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                                     (onLocationSelected)="onLocationDestinationSelected($event)">
+     </mat-google-maps-autocomplete>
+   </div>
+<label>To</label>
+   <div fxFlex fxFlexAlign="center"
+   class="autocomplete-container"
+   [ngStyle]="{'min-width.%': 100}"
+>        <mat-google-maps-autocomplete [appearance]="appearance.OUTLINE"
+                                (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                                (onLocationSelected)="onLocationOriginSelected($event)">
+</mat-google-maps-autocomplete>
+
+<div  *ngFor="let item of path.upDateTime ;let i=index">
+  <div> 
+     <input type="checkbox" 
+(change)="onDaySelected(i,$event.target);">{{item.dName}}
+    <app-days-of-week *ngIf="item.dTravelDay"></app-days-of-week>
+</div>
+</div>
